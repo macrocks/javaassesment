@@ -1,0 +1,26 @@
+
+CREATE TABLE CUSTOMER ( CUSTOMERID INTEGER PRIMARY KEY AUTOINCREMENT, CUSTOMERNAME VARCHAR(20) );
+
+CREATE TABLE SALES ( SALESID INTEGER PRIMARY KEY AUTOINCREMENT, CUSTOMERID INTEGER,AMOUNT FLOAT,FOREIGN KEY (CUSTOMERID) REFERENCES CUSTOMER(CUSTOMERID) );
+
+CREATE TABLE VIP ( CUSTOMERID INTEGER PRIMARY KEY FOREIGN KEY REFERENCES CUSTOMER(CUSTOMERID) );
+
+INSERT INTO CUSTOMER(customername) VALUES ('DEMO1')
+
+SELECT * FROM vip
+
+SELECT * FROM customer
+
+SELECT * FROM SALES
+
+SELECT  a.customerid,
+        a.customername,
+        SUM(b.amount) total_value
+FROM    customer a
+        right JOIN SALES b
+            ON a.customerid = b.customerid
+GROUP   BY a.customerid,
+        a.customername
+        
+select customerid from customer where customerid not in (
+select customerid from vip)
